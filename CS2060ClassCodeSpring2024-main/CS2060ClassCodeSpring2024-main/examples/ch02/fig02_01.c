@@ -1,10 +1,29 @@
 // fig02_01.c
 // A first program in C.
 #include <stdio.h>
-
+int length = 0 ;
+int width = 0;
+int area = 0;
+int scanfReturn = 0;
 // function main begins program execution 
 int main(void) {
    printf("Welcome to C!\n");
+
+   puts("enter the length");
+
+   scanf("%d", &length);
+
+   puts("enter the Width");
+
+   scanf("%d", &width);
+
+	area = length * width;
+
+	//scanfReturn = scanf();
+
+	printf("length=%d\nwidth=%d\narea=%d",length,width,area);
+
+	return 0;
 } // end function main 
 
 

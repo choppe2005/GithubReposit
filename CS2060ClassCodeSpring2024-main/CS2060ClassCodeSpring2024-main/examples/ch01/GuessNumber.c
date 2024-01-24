@@ -17,7 +17,7 @@ bool isCorrect(int guess, int answer);
 
 int main(void) {
     //seeds the random generator rand() 
-   srand(time(0)); 
+   //srand(time(0)); 
 
    //calling the Method so it starts the game 
    guessGame();
@@ -35,9 +35,9 @@ void guessGame(void) {
    // do while loop for the guessing of the random number
    do {
 
-      // 
+      //
       int answer = 1 + rand() % MAX;
-
+      
       //explanation
       printf("I have a number between %d and %d.\n", MIN, MAX);
 
