@@ -1,15 +1,16 @@
 // fig02_01.c
 // A first program in C.
 #include <stdio.h>
-int a = 1;
-int length = 0 ;
-int width = 0;
-int area = 0;
-double avg = 0;
-int scanfReturn1 = 0;
-int scanfReturn2 = 0;
 // function main begins program execution 
 int main(void) {
+	int a = 1;
+	int length = 0;
+	int width = 0;
+	int area = 0;
+	double avg = 0;
+	int scanfReturn1 = 0;
+	int scanfReturn2 = 0;
+
    printf("Welcome to C!\n");
    do {
 	   puts("enter the length");
@@ -36,14 +37,18 @@ int main(void) {
 		   }
 	   } while (a == 1);
 	   avg = (length + width) / 2.0;
-	   area = length * width;
 
 	   printf("average of length and width:%0.1f\n", avg);
-	   printf("length=%d\nwidth=%d\narea=%d", length, width, area);
+	   area = calculateArea(length, width);
+	   printf("length=%d\nwidth=%d\n", length, width);
 
 	   return 0;
+}// end function main 
+int calculateArea(int length, int width) {
+	double area = length * width;
+	printf("Area: %0.1f\n", area);
+	return area;
 }
- // end function main 
 
 
 
