@@ -56,6 +56,7 @@ int main(void) {
    printf("C: %d\n", cCount); 
    printf("D: %d\n", dCount); 
    printf("F: %d\n", fCount); 
+   printf("closing gradebook...");
 }
 
 
