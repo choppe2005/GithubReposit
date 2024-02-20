@@ -2,10 +2,8 @@
 #include <stdlib.h>
 #include <time.h>
 
-// Used to generate a random number of minutes based on the number of miles
 #define MIN_RAND_MINUTES_FACTOR 1.2
 #define MAX_RAND_MINUTES_FACTOR 1.5
-// Sentinel value to end rider mode
 #define SENTINEL_VALUE -1
 
 // Function prototypes
@@ -13,9 +11,8 @@ double getValidDouble(double min, double max, double sentinel);
 double calculateFare(double base, double minuteCost, double mileCost, double minRate, double miles, int minutes);
 void printFare(int count, double miles, int minutes, double fare);
 
-int main(void)
-{
-    // Initialize variables
+int main(void) {
+    // Constants and variables initialization
     int minMiles = 1;
     int maxMiles = 100;
     double baseFare = 1.8;
@@ -23,25 +20,18 @@ int main(void)
     double costPerMile = 1.2;
     double minFlatRate = 20.0;
 
-    // Other variables
+    // Business summary variables
     int riderCount = 0;
     int totalMiles = 0;
     int totalMinutes = 0;
     double totalFare = 0.0;
 
-    srand(time(NULL)); // Seed for random number generation
+    // Seed for random number generation
+    srand(time(NULL));
 
-    // Main loop for rider mode
-    while (1)
-    {
-        printf("Welcome to the UCCS Ride Share. We can only provide services for rides from %d to %d miles.\n", minMiles, maxMiles);
-
-        // Get the number of miles
-        double miles = getValidDouble(minMiles, maxMiles, SENTINEL_VALUE);
-
-        if (miles == SENTINEL_VALUE)
-            break; // End the program if the sentinel value is entered
-
+    double miles;
+    // Main loop for rider mode, continues until the sentinel value is entered
+    while ((miles = getValidDouble(minMiles, maxMiles, SENTINEL_VALUE)) != SENTINEL_VALUE) {
         // Calculate random minutes based on the number of miles
         int minMinutes = (int)(MIN_RAND_MINUTES_FACTOR * miles);
         int maxMinutes = (int)(MAX_RAND_MINUTES_FACTOR * miles);
@@ -60,56 +50,50 @@ int main(void)
     }
 
     // Business summary
-    if (riderCount > 0)
-    {
+    if (riderCount > 0) {
         printf("\nUCCS Ride Share Business Summary\n\n");
         printFare(riderCount, totalMiles, totalMinutes, totalFare);
     }
-    else
-    {
+    else {
         printf("There were no rides\n");
     }
 
     return 0;
 }
 
-double getValidDouble(double min, double max, double sentinel)
-{
+// Function to get a valid double input within a specified range or sentinel value
+double getValidDouble(double min, double max, double sentinel) {
     double input;
     char buffer[100];
-    while (1)
-    {
+    while (1) {
+        // Prompt user for input
         printf("Enter the number of miles to your destination: ");
-        if (scanf("%lf", &input) != 1)
-        {
+        // Check if the input is a valid double
+        if (scanf("%lf", &input) != 1) {
             // Invalid input, clear buffer
             scanf("%s", buffer);
             printf("Error: You did not enter a number.\n");
         }
-        else if (input == sentinel)
-        {
+        else if (input == sentinel) {
             return sentinel; // Sentinel value entered
         }
-        else if (input < min || input > max)
-        {
+        else if (input < min || input > max) {
             printf("Error: Not within %.2lf and %.2lf miles.\n", min, max);
         }
-        else
-        {
-            // Valid input
-            return input;
+        else {
+            return input; // Valid input
         }
     }
 }
 
-double calculateFare(double base, double minuteCost, double mileCost, double minRate, double miles, int minutes)
-{
+// Function to calculate the fare based on specified parameters
+double calculateFare(double base, double minuteCost, double mileCost, double minRate, double miles, int minutes) {
     double fare = base + (minuteCost * minutes) + (mileCost * miles);
     return (fare < minRate) ? minRate : fare;
 }
 
-void printFare(int count, double miles, int minutes, double fare)
-{
+// Function to print fare information for a rider
+void printFare(int count, double miles, int minutes, double fare) {
     printf("\nCurrent Ride Information\n\n");
     printf("Rider\tNumber of Miles     Number of Minutes    Ride Fare Amount\n");
     printf("%-8d%-20.2lf%-22d$%-16.2lf\n", count, miles, minutes, fare);
