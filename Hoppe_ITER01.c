@@ -65,9 +65,11 @@ int main(void) {
 double getValidDouble(double min, double max, double sentinel) {
     double input;
     char buffer[100];
-    while (1) {
+    int isValidInput = 0;
+    while (!isValidInput) {
         // Prompt user for input
         printf("Enter the number of miles to your destination: ");
+
         // Check if the input is a valid double
         if (scanf("%lf", &input) != 1) {
             // Invalid input, clear buffer
@@ -81,6 +83,7 @@ double getValidDouble(double min, double max, double sentinel) {
             printf("Error: Not within %.2lf and %.2lf miles.\n", min, max);
         }
         else {
+            isValidInput = 1;
             return input; // Valid input
         }
     }
